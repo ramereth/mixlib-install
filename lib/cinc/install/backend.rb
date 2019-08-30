@@ -1,4 +1,5 @@
 #
+# Author:: Patrick Wright (<patrick@chef.io>)
 # Copyright:: Copyright (c) 2015-2018 Chef Software, Inc.
 # License:: Apache License, Version 2.0
 #
@@ -15,18 +16,21 @@
 # limitations under the License.
 #
 
-require "mixlib/install/generator/bourne"
-require "mixlib/install/generator/powershell"
+require "cinc/install/backend/package_router"
 
-module Mixlib
+module Cinc
   class Install
-    class Generator
-      def self.install_command(options)
-        if options.for_ps1?
-          PowerShell.new(options).install_command
-        else
-          Bourne.new(options).install_command
-        end
+    class Backend
+      def self.available_versions(options)
+        backend(options).available_versions
+      end
+
+      def self.info(options)
+        backend(options).info
+      end
+
+      def self.backend(options)
+        Backend::PackageRouter.new(options)
       end
     end
   end

@@ -17,14 +17,14 @@
 #
 
 require "json"
-require "mixlib/install/artifact_info"
-require "mixlib/install/backend/base"
-require "mixlib/install/product"
-require "mixlib/install/util"
+require "cinc/install/artifact_info"
+require "cinc/install/backend/base"
+require "cinc/install/product"
+require "cinc/install/util"
 require "mixlib/versioning"
 require "net/http"
 
-module Mixlib
+module Cinc
   class Install
     class Backend
       class PackageRouter < Base

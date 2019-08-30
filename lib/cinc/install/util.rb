@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-module Mixlib
+module Cinc
   class Install
     class Util
       class << self
@@ -126,8 +126,8 @@ module Mixlib
         # @param name [Array] headers
         # @return [String] generated user-agent string
         def user_agent_string(headers)
-          require "mixlib/install/version"
-          user_agents = %W{mixlib-install/#{Mixlib::Install::VERSION}}
+          require "cinc/install/version"
+          user_agents = %W{cinc-install/#{Cinc::Install::VERSION}}
           user_agents << headers
           # Ensure that if the default user agent is aleady set it doesn't get duplicated
           user_agents.flatten.compact.uniq.join(" ")

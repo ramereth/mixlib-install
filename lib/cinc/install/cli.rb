@@ -12,30 +12,30 @@
 # limitations under the License.
 #
 
-require "mixlib/install"
+require "cinc/install"
 require "thor"
 
-module Mixlib
+module Cinc
   class Install
     class Cli < Thor
       include Thor::Actions
 
-      desc "version", "print mixlib-install version"
+      desc "version", "print cinc-install version"
       def version
-        require "mixlib/install/version"
-        say Mixlib::Install::VERSION
+        require "cinc/install/version"
+        say Cinc::Install::VERSION
       end
 
       desc "list-versions PRODUCT_NAME CHANNEL", "list available version for a product/channel"
       def list_versions(product_name, channel)
-        say Mixlib::Install.available_versions(product_name, channel).join("\n")
+        say Cinc::Install.available_versions(product_name, channel).join("\n")
       end
 
       desc "download PRODUCT_NAME", "download an artifact"
       option :channel,
         default: :stable,
         aliases: ["-c"],
-        enum: Mixlib::Install::Options::SUPPORTED_CHANNELS.map(&:to_s)
+        enum: Cinc::Install::Options::SUPPORTED_CHANNELS.map(&:to_s)
       option :version,
         default: :latest,
         aliases: ["-v"]
@@ -49,7 +49,7 @@ module Mixlib
       option :architecture,
         default: "x86_64",
         aliases: ["-a"],
-        enum: Mixlib::Install::Options::SUPPORTED_ARCHITECTURES.map(&:to_s)
+        enum: Cinc::Install::Options::SUPPORTED_ARCHITECTURES.map(&:to_s)
       option :platform_version_compat,
         desc: "Enable or disable platform version compatibility mode.
 This will match the closest earlier version if the passed version is unavailable.
@@ -64,7 +64,7 @@ If no earlier version is found the earliest version available will be set.",
         type: :boolean
       def download(product_name)
         # Set mininum options
-        mixlib_install_options = {
+        cinc_install_options = {
           channel: options[:channel].to_sym,
           product_name: product_name,
           product_version: options[:version],
@@ -77,14 +77,14 @@ If no earlier version is found the earliest version available will be set.",
 
         # auto detect platform options if not configured
         if options[:platform].nil? && options[:platform_version].nil?
-          mixlib_install_options.merge!(Mixlib::Install.detect_platform)
+          cinc_install_options.merge!(Cinc::Install.detect_platform)
         end
 
-        installer = Mixlib::Install.new(mixlib_install_options)
+        installer = Cinc::Install.new(cinc_install_options)
 
         begin
           artifact = installer.artifact_info
-        rescue Mixlib::Install::Backend::ArtifactsNotFound => e
+        rescue Cinc::Install::Backend::ArtifactsNotFound => e
           abort e.message
         end
 
@@ -109,11 +109,11 @@ If no earlier version is found the earliest version available will be set.",
         desc: "Install script type",
         aliases: ["-t"],
         default: "sh",
-        enum: Mixlib::Install::Options::SUPPORTED_SHELL_TYPES.map(&:to_s)
+        enum: Cinc::Install::Options::SUPPORTED_SHELL_TYPES.map(&:to_s)
       def install_script
         context = {}
         context[:base_url] = options[:endpoint] if options[:endpoint]
-        script = eval("Mixlib::Install.install_#{options[:type]}(context)")
+        script = eval("Cinc::Install.install_#{options[:type]}(context)")
         if options[:file]
           File.open(options[:file], "w") { |io| io.write(script) }
           say "Script written to #{options[:file]}"

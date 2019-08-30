@@ -17,9 +17,9 @@
 
 require "erb"
 require "ostruct"
-require "mixlib/install/util"
+require "cinc/install/util"
 
-module Mixlib
+module Cinc
   class Install
     class Generator
       class Base

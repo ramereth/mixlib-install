@@ -15,9 +15,9 @@
 # limitations under the License.
 #
 
-require "mixlib/install/generator/base"
+require "cinc/install/generator/base"
 
-module Mixlib
+module Cinc
   class Install
     class Generator
       class PowerShell < Base

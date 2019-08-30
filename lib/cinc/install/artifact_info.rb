@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-module Mixlib
+module Cinc
   class Install
     class ArtifactInfo
 

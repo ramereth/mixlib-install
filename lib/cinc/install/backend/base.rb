@@ -16,9 +16,9 @@
 # limitations under the License.
 #
 
-require "mixlib/install/util"
+require "cinc/install/util"
 
-module Mixlib
+module Cinc
   class Install
     class Backend
       class ArtifactsNotFound < StandardError; end

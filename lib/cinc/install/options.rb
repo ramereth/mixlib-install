@@ -16,11 +16,11 @@
 # limitations under the License.
 #
 
-require "mixlib/install/product"
-require "mixlib/install/util"
+require "cinc/install/product"
+require "cinc/install/util"
 require "mixlib/versioning"
 
-module Mixlib
+module Cinc
   class Install
     class Options
       class InvalidOptions < ArgumentError; end

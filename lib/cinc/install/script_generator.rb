@@ -17,11 +17,11 @@
 # limitations under the License.
 #
 
-require "mixlib/install/util"
-require "mixlib/install/generator/powershell"
+require "cinc/install/util"
+require "cinc/install/generator/powershell"
 require "cgi"
 
-module Mixlib
+module Cinc
   class Install
     class ScriptGenerator
       attr_accessor :version
@@ -185,7 +185,7 @@ module Mixlib
       # @return [String] PowerShell helpers and shell vars for platform info
       def powershell_prefix
         [
-          Mixlib::Install::Generator::PowerShell.get_script("helpers.ps1"),
+          Cinc::Install::Generator::PowerShell.get_script("helpers.ps1"),
           "$platform_architecture = Get-PlatformArchitecture",
           "$platform_version = Get-PlatformVersion",
         ].join("\n")

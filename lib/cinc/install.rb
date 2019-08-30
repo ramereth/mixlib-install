@@ -20,13 +20,13 @@
 require "mixlib/versioning"
 require "mixlib/shellout"
 
-require "mixlib/install/backend"
-require "mixlib/install/options"
-require "mixlib/install/generator"
-require "mixlib/install/generator/bourne"
-require "mixlib/install/generator/powershell"
+require "cinc/install/backend"
+require "cinc/install/options"
+require "cinc/install/generator"
+require "cinc/install/generator/bourne"
+require "cinc/install/generator/powershell"
 
-module Mixlib
+module Cinc
   class Install
 
     attr_reader :options

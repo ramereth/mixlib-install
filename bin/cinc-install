@@ -5,10 +5,10 @@ Signal.trap("INT") { exit 1 }
 $:.push File.expand_path("../lib", __FILE__)
 $stdout.sync = true
 
-require "mixlib/install/cli"
+require "cinc/install/cli"
 
 begin
-  Mixlib::Install::Cli.start(ARGV)
+  Cinc::Install::Cli.start(ARGV)
 rescue StandardError => e
   abort e.message
 end

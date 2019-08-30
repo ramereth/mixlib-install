@@ -15,9 +15,9 @@
 # limitations under the License.
 #
 
-require "mixlib/versioning"
+require "cinc/versioning"
 
-module Mixlib
+module Cinc
   class Install
     class Product
       def initialize(key, &block)
@@ -179,7 +179,7 @@ module Mixlib
       #
       # @return Hash{String => Product}
       #   :key => product_key
-      #   :value => Mixlib::Install::Product instance
+      #   :value => Cinc::Install::Product instance
       def products_available_on_downloads_site
         @product_map.reject do |product_key, product|
           product.downloads_product_page_url == :not_available
@@ -194,7 +194,7 @@ end
 # you run `bundle exec rake matrix` at the home of this repository
 # to update PRODUCT_MATRIX.md.
 #
-PRODUCT_MATRIX = Mixlib::Install::ProductMatrix.new do
+PRODUCT_MATRIX = Cinc::Install::ProductMatrix.new do
   # Products in alphabetical order
 
   product "analytics" do
